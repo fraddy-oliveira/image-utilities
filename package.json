@@ -1,0 +1,33 @@
+{
+  "name": "image-utilities",
+  "version": "1.0.0",
+  "description": "Image utilities package provides a interface to perform various operations on images.",
+  "private": true,
+  "scripts": {
+    "start": "node ./src/main.js",
+    "build": "webpack",
+    "lint": "eslint ./src/",
+    "test": "I am in Image utilities"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fraddy-oliveira/image-utilities.git"
+  },
+  "author": "Fraddy Oliveira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fraddy-oliveira/image-utilities/issues"
+  },
+  "homepage": "https://github.com/fraddy-oliveira/image-utilities#readme",
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-webpack-plugin": "^3.0.1",
+    "webpack": "^5.54.0",
+    "webpack-cli": "^4.8.0"
+  }
+}

@@ -1,0 +1,8 @@
+# Application
+/specs
+
+# Package manager
+node_modules/
+
+# build
+dist/
