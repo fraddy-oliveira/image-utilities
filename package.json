@@ -7,7 +7,7 @@
     "start": "node ./src/main.js",
     "build": "webpack",
     "lint": "eslint ./src/",
-    "test": "I am in Image utilities"
+    "test": "jest ./src/tests/"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.24.2",
     "eslint-webpack-plugin": "^3.0.1",
+    "jest": "^27.2.3",
     "webpack": "^5.54.0",
     "webpack-cli": "^4.8.0"
   }
