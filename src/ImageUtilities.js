@@ -4,7 +4,7 @@ const util = require('util');
 
 const sharp = require('sharp');
 
-const pipeline = util.promisify(stream.pipeline);
+const pipelineAsync = util.promisify(stream.pipeline);
 
 class ImageUtilities {
   constructor(src = '', dest = '') {
@@ -32,9 +32,21 @@ class ImageUtilities {
 
     resizeOptions.height = height || options.height;
 
-    const readableStream = fs.createReadStream(this.src);
+    let readableStream;
+    let writableStream;
 
-    const writableStream = fs.createWriteStream(this.dest);
+    try {
+      readableStream = fs.createReadStream(this.src);
+    } catch (err) {
+      throw new Error(`Failed to create readable stream from ${this.src}`);
+    }
+
+    try {
+      writableStream = !ImageUtilities.isStream(this.dest)
+        ? fs.createWriteStream(this.dest) : this.dest;
+    } catch (err) {
+      throw new Error(`Failed to create writable stream from ${this.dest}`);
+    }
 
     return ImageUtilities.resizeTransformer(readableStream, writableStream, resizeOptions);
   }
@@ -50,11 +62,15 @@ class ImageUtilities {
 
     const transformer = sharp().resize(resizeOptions);
 
-    await pipeline(
-      readableStream,
-      transformer,
-      writableStream,
-    );
+    try {
+      await pipelineAsync(
+        readableStream,
+        transformer,
+        writableStream,
+      );
+    } catch (err) {
+      throw new Error(`Image resize transform failed with error: ${err.name}`);
+    }
 
     return true;
   }
