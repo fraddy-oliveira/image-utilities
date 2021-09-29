@@ -57,7 +57,7 @@ class ImageUtilities {
     }
 
     if (!ImageUtilities.isStream(writableStream)) {
-      throw new Error('Input source is not writable stream');
+      throw new Error('Destination is not writable stream');
     }
 
     const transformer = sharp().resize(resizeOptions);
@@ -69,7 +69,7 @@ class ImageUtilities {
         writableStream,
       );
     } catch (err) {
-      throw new Error(`Image resize transform failed with error: ${err.name}`);
+      throw new Error(`Image resize transform failed with error: ${err.message}`);
     }
 
     return true;
@@ -78,6 +78,10 @@ class ImageUtilities {
   static isStream(input) {
     //    @TODO : research if other stream check needs to be included
     return !!(input instanceof stream.Writable || input instanceof stream.Readable);
+  }
+
+  static async metadata(input) {
+    return sharp(input).metadata();
   }
 }
 
